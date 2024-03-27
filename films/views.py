@@ -26,9 +26,12 @@ class RegisterView(FormView):
 
 def check_username(request):
     username  = request.POST.get('username')
-    if not username:
-        return HttpResponse('Username is required')
-    if get_user_model().objects.filter(username=username).exists():
-        return HttpResponse('Username already exists')
+    if username:
+        if get_user_model().objects.filter(username=username).exists():
+            return HttpResponse("<div class='username-error' style='color: red;'>This username already exists</div>")
+        else:
+            return HttpResponse("<div class='username-available' style='color: green;'>This username is available</div>")
     else:
-        return HttpResponse('Username is available')
+        return HttpResponse("<div class='username-error' style='color: red;'>Username is required</div>")
+    
+
