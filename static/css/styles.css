@@ -5,7 +5,7 @@
 
 .success {
     color: green;
-    transition: all ease-in 2s;
+    transition: all ease-in .5s;
 }
 
 .error {
