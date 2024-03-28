@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-between">
     <section class="col-6">
         {% if messages %}
-            <ul class="messages">
+            <ul class="messages" hx-get="{% url 'clear' %}" hx-trigger="load delay:3s">
                 {% for message in messages %}
                     <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
                 {% endfor %}
