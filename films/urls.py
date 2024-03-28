@@ -17,8 +17,6 @@ htmx_urlpatterns = [
     # Film CRUD operations
     path('add-film/', views.add_film, name='add-film'),
     path('delete-film/<int:pk>/', views.delete_film, name='delete-film'),
-    # search movie
-    path('search-movie/', views.search_movie, name='search-movie'),
 ]
 
 
