@@ -78,7 +78,10 @@ def delete_film(request, pk):
 
 def search_film(request):
     search_text = request.POST.get('search')
-    results = Film.objects.filter(name__icontains=search_text)
+    userfilms  = request.user.films.all()
+    results = Film.objects.filter(name__icontains=search_text).exclude(
+        name__in=userfilms.values_list('name', flat=True)
+    )
     context = {
         'results': results
     }
