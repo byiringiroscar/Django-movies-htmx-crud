@@ -9,6 +9,9 @@
             <input type="text" name="filmname" class="form-control-sm mr-2" placeholder="Enter a film" />
             <button hx-post="{% url 'add-film' %}" hx-target="#film-list" type="submit" class="btn btn-success btn-sm">Add Film</button>
         </form>
+        <form>
+            <input type="text" name="search" class="form-control-sm mr-2" placeholder="Search" hx-get="{% url 'search-movie' %}" hx-trigger='keyup' hx-target="#film-list" />
+        </form>
     </div>
     <hr/>
     
