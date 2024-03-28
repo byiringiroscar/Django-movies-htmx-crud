@@ -71,3 +71,13 @@ def delete_film(request, pk):
     request.user.films.remove(film)
     films = request.user.films.all()
     return render(request, 'partials/film-list.html', {'films': films})
+
+
+
+def search_film(request):
+    search_text = request.POST.get('search')
+    results = Film.objects.filter(name__icontains=search_text)
+    context = {
+        'results': results
+    }
+    return render(request, 'partials/search-results.html', context)
