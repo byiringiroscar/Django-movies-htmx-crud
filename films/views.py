@@ -60,11 +60,10 @@ def add_film(request):
     films = request.user.films.all()
     return render(request, 'partials/film-list.html', {'films': films})
 
-# def delete_film(request, pk):
-#     film = Film.objects.get(pk=pk)
-#     request.user.films.remove(film)
-#     film.delete()
-#     films = request.user.films.all()
-#     return render(request, 'partials/film-list.html', {'films': films})
+def delete_film(request, pk):
+    film = Film.objects.get(pk=pk)
+    request.user.films.remove(film)
+    films = request.user.films.all()
+    return render(request, 'partials/film-list.html', {'films': films})
     
 

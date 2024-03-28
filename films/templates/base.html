@@ -30,6 +30,10 @@
         {% block content %}
         {% endblock %}
     </div>
-    
+    <script>
+        document.body.addEventListener('htmx:configRequest', function(event) {
+            event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+        });
+    </script>
 </body>
 </html>
