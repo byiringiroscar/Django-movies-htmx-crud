@@ -4,6 +4,8 @@ from django.contrib.auth.views import LoginView
 from django.urls import reverse_lazy
 from django.views.generic import FormView, TemplateView
 from django.contrib.auth import get_user_model
+from films.models import Film
+from django.views.generic import ListView
 
 from films.forms import RegisterForm
 
@@ -33,5 +35,17 @@ def check_username(request):
             return HttpResponse("<div id='username-success' class='success'>This username is available</div>")
     else:
         return HttpResponse("<div id='username-error' class='error'>Username is required</div>")
+    
+
+
+
+class FilmList(ListView):
+    template_name = 'films.html'
+    model = Film
+    context_object_name = 'films'
+
+    def get_queryset(self):
+        user = self.request.user
+        return user.films.all()
     
 
