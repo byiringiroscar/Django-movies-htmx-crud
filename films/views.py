@@ -7,6 +7,10 @@ from django.contrib.auth import get_user_model
 from films.models import Film
 from django.views.generic import ListView
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.decorators.http import require_http_methods
+
 from films.forms import RegisterForm
 
 # Create your views here.
@@ -48,7 +52,7 @@ class FilmList(ListView):
         user = self.request.user
         return user.films.all()
     
-
+@login_required
 def add_film(request):
     name = request.POST.get('filmname')
     film = Film.objects.create(name=name)
@@ -60,6 +64,8 @@ def add_film(request):
     films = request.user.films.all()
     return render(request, 'partials/film-list.html', {'films': films})
 
+@login_required
+@require_http_methods(['DELETE'])
 def delete_film(request, pk):
     film = Film.objects.get(pk=pk)
     request.user.films.remove(film)
