@@ -49,3 +49,15 @@ class FilmList(ListView):
         return user.films.all()
     
 
+def add_film(request):
+    name = request.POST.get('filmname')
+    film = Film.objects.create(name=name)
+
+    # add the film to the user's list
+    request.user.films.add(film)
+
+    # return the template with all of the users's films
+    films = request.user.films.all()
+    return render(request, 'partials/film-list.html', {'films': films})
+    
+
