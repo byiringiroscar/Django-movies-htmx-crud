@@ -55,6 +55,8 @@ class FilmList(ListView):
 @login_required
 def add_film(request):
     name = request.POST.get('filmname')
+    if name == '':
+        return render(request, 'partials/film-list.html', {'films': request.user.films.all()})
     film = Film.objects.get_or_create(name=name)[0]
 
     # add the film to the user's list
